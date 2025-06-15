@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,54 +7,6 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
@@ -89,6 +42,16 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Custom podcast colors */
+    --podcast-tech: 25 95% 53%;
+    --podcast-health: 142 76% 36%;
+    --podcast-business: 217 91% 60%;
+    --podcast-education: 271 91% 65%;
+    --podcast-entertainment: 340 82% 52%;
+    --podcast-news: 43 96% 56%;
+    --podcast-sports: 122 39% 49%;
+    --podcast-science: 200 98% 39%;
   }
 }
 
@@ -100,4 +63,54 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer components {
+  .podcast-card {
+    @apply bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20;
+  }
+  
+  .podcast-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .filter-chip {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer;
+  }
+  
+  .filter-chip-active {
+    @apply bg-primary text-primary-foreground shadow-lg scale-105;
+  }
+  
+  .filter-chip-inactive {
+    @apply bg-secondary/50 text-secondary-foreground hover:bg-secondary hover:scale-105;
+  }
+  
+  .gradient-tech { background: linear-gradient(135deg, hsl(var(--podcast-tech)), hsl(var(--podcast-tech))/0.7); }
+  .gradient-health { background: linear-gradient(135deg, hsl(var(--podcast-health)), hsl(var(--podcast-health))/0.7); }
+  .gradient-business { background: linear-gradient(135deg, hsl(var(--podcast-business)), hsl(var(--podcast-business))/0.7); }
+  .gradient-education { background: linear-gradient(135deg, hsl(var(--podcast-education)), hsl(var(--podcast-education))/0.7); }
+  .gradient-entertainment { background: linear-gradient(135deg, hsl(var(--podcast-entertainment)), hsl(var(--podcast-entertainment))/0.7); }
+  .gradient-news { background: linear-gradient(135deg, hsl(var(--podcast-news)), hsl(var(--podcast-news))/0.7); }
+  .gradient-sports { background: linear-gradient(135deg, hsl(var(--podcast-sports)), hsl(var(--podcast-sports))/0.7); }
+  .gradient-science { background: linear-gradient(135deg, hsl(var(--podcast-science)), hsl(var(--podcast-science))/0.7); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
